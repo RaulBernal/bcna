@@ -61,7 +61,7 @@ func (app *App) StickyFingers(_ upgradetypes.Plan) {
 			// }
 			// Set CosmWasm params
 			wasmParams := wasmtypes.DefaultParams()
-			wasmParams.CodeUploadAccess = wasmtypes.AllowEverybody //AllowNobody for MainNET
+			wasmParams.CodeUploadAccess = wasmtypes.AllowNobody //AllowNobody for MainNET
 			wasmParams.InstantiateDefaultPermission = wasmtypes.AccessTypeAnyOfAddresses
 
 			err := app.WasmKeeper.SetParams(ctx, wasmParams)
