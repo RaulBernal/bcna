@@ -30,7 +30,7 @@ func (app App) RegisterUpgradeHandlers() {
 }
 
 func (app *App) StickyFingers(_ upgradetypes.Plan) {
-	planName := "stickyfingers"
+	planName := "stickyfingers2"
 	app.UpgradeKeeper.SetUpgradeHandler(
 		planName,
 		func(ctx context.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
