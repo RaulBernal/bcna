@@ -63,7 +63,8 @@ func (app *App) StickyFingers(_ upgradetypes.Plan) {
 			wasmParams := wasmtypes.DefaultParams()
 			wasmParams.CodeUploadAccess = wasmtypes.AllowEverybody //AllowNobody for MainNET
 			wasmParams.InstantiateDefaultPermission = wasmtypes.AccessTypeAnyOfAddresses
-			err = app.WasmKeeper.SetParams(ctx, wasmParams)
+
+			err := app.WasmKeeper.SetParams(ctx, wasmParams)
 			app.Logger().Info("Setting the params into the Wasm params keeper...")
 			if err != nil {
 				app.Logger().Error("Error setting the params into the Wasm params keeper...")
