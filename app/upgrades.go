@@ -11,8 +11,6 @@ import (
 	upgradetypes "cosmossdk.io/x/upgrade/types"
 
 	// Fix Consensus Params
-	"github.com/cosmos/cosmos-sdk/runtime"
-	consensuskeeper "github.com/cosmos/cosmos-sdk/x/consensus/keeper"
 
 	// WASM upgrade/addition
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
@@ -41,26 +39,26 @@ func (app *App) StickyFingers(_ upgradetypes.Plan) {
 
 			}
 			// New consensus params keeper using the wrong key again and move the data into the consensus params keeper with the right key
-			storesvc := runtime.NewKVStoreService(app.GetKey("upgrade"))
-			consensuskeeper := consensuskeeper.NewKeeper(
-				app.appCodec,
-				storesvc,
-				app.AccountKeeper.GetAuthority(),
-				runtime.EventService{},
-			)
+			// storesvc := runtime.NewKVStoreService(app.GetKey("upgrade"))
+			// consensuskeeper := consensuskeeper.NewKeeper(
+			// 	app.appCodec,
+			// 	storesvc,
+			// 	app.AccountKeeper.GetAuthority(),
+			// 	runtime.EventService{},
+			// )
 
-			params, err := consensuskeeper.ParamsStore.Get(ctx)
-			app.Logger().Info("Getting the params into the Consensus params keeper...")
-			if err != nil {
-				app.Logger().Error("Error getting the params into the Consensus params keeper...")
-				return nil, err
-			}
-			err = app.ConsensusParamsKeeper.ParamsStore.Set(ctx, params)
-			app.Logger().Info("Setting the params into the Consensus params keeper...")
-			if err != nil {
-				app.Logger().Error("Error setting the params into the Consensus params keeper...")
-				return nil, err
-			}
+			// params, err := consensuskeeper.ParamsStore.Get(ctx)
+			// app.Logger().Info("Getting the params into the Consensus params keeper...")
+			// if err != nil {
+			// 	app.Logger().Error("Error getting the params into the Consensus params keeper...")
+			// 	return nil, err
+			// }
+			// err = app.ConsensusParamsKeeper.ParamsStore.Set(ctx, params)
+			// app.Logger().Info("Setting the params into the Consensus params keeper...")
+			// if err != nil {
+			// 	app.Logger().Error("Error setting the params into the Consensus params keeper...")
+			// 	return nil, err
+			// }
 			// Set CosmWasm params
 			wasmParams := wasmtypes.DefaultParams()
 			wasmParams.CodeUploadAccess = wasmtypes.AllowEverybody //AllowNobody for MainNET
